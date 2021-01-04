@@ -1,0 +1,31 @@
+description = 'WinTestNG-core'
+version = '1.0.0-SNAPSHOT'
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-freemarker'
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
+    compile 'io.rest-assured:rest-assured:4.1.2'
+    compile 'org.testng:testng:6.14.3'
+    compile 'com.alibaba:QLExpress:3.2.0'
+    compile 'org.springframework.boot:spring-boot-starter-test'
+    compile 'com.winbaoxian.common:freemarker-functions:1.0.0-SNAPSHOT'
+}
+
+//支持上传到maven nexus库
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://192.168.180.191:8081/nexus/content/repositories/snapshots/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.project {
+                name = project.name
+                packaging = 'jar'
+                description = 'wintesng core'
+            }
+        }
+    }
+}

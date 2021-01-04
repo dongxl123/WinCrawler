@@ -1,0 +1,4 @@
+rootProject.name = 'WinCrawler'
+include 'wincrawler-core'
+include 'example'
+

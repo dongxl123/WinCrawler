@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="TestNG Sample Suite1">
+    <test name="export">
+        <parameter name="sql" value="select * from crawler_task where id = 30"/>
+        <classes>
+            <class name="com.winbaoxian.crawler.example.CrawlerExecutor">
+                <methods><include name="export"></include></methods>
+            </class>
+        </classes>
+    </test>
+</suite>

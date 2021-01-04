@@ -1,0 +1,69 @@
+allprojects {
+    apply plugin: 'maven'
+
+    group = 'com.winbaoxian.clawler'
+    version = '1.0.0'
+}
+
+subprojects {
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+        dependencies {
+            classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.19.RELEASE'
+        }
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenLocal()
+        maven { url "http://192.168.180.191:8081/nexus/content/repositories/public" }
+        maven { url "http://192.168.180.191:8081/nexus/content/repositories/snapshots/" }
+        maven { url "https://nexus.winbaoxian.cn/repository/maven-public/" }
+        maven { url "https://nexus.winbaoxian.cn/repository/maven-snapshots/" }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven {
+            credentials {
+                username 'YqEg7E'
+                password 'kqPhqT56Db'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/77327-snapshot-eSlStJ/'
+        }
+        mavenCentral()
+    }
+
+    ext['selenium.version'] = '4.0.0-alpha-6'
+    dependencies {
+        compile 'org.apache.commons:commons-lang3:3.7'
+        compile 'commons-beanutils:commons-beanutils:1.9.3'
+        compileOnly 'org.projectlombok:lombok:1.16.22'
+        compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
+        compile 'org.mapstruct:mapstruct-processor:1.2.0.Final'
+        compile 'org.mongodb:mongo-java-driver:3.10.1'
+        compile 'mysql:mysql-connector-java:8.0.15'
+        compile 'commons-codec:commons-codec:1.13'
+        compile 'commons-io:commons-io:2.7'
+        compile 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-6'
+    }
+
+    task "create-dirs" << {
+        sourceSets*.java.srcDirs*.each { it.mkdirs() }
+        sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+    }
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4'
+    distributionType = 'all'
+}
+
+
+
+

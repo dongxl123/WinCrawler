@@ -1,0 +1,18 @@
+description = 'example'
+version = '1.0.0-SNAPSHOT'
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    compile project(":wincrawler-core")
+}
+
+test {
+    reports.html.enabled = false
+    reports.junitXml.enabled = false
+    useTestNG() {
+        //指定testng配置文件
+        suites(file('src/test/resources/projectname/crawler.xml'))
+        jvmArgs '-Dfile.encoding=UTF-8'
+    }
+}
